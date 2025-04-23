@@ -24,7 +24,7 @@ func GenerateNonce(size uint) (string, error) {
 
 // WithNonce returns a middleware closure that generates random nonces of the given size in bytes and sets the
 // Content-Security-Policy response header in addition to setting it in the context for automatice usage by templ.
-func WithNonce(size uint) func(http.Handler) http.Handler {
+func WithNonce(size uint) Middleware {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			nonce, err := GenerateNonce(size)
