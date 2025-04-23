@@ -18,13 +18,11 @@ type gzipRW struct {
 
 // Chain applies the given middlewares to the next handler in the given order and returns it.
 func Chain(next http.Handler, middlewares ...Middleware) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		for _, mw := range middlewares {
-			next = mw(next)
-		}
+	for _, mw := range middlewares {
+		next = mw(next)
+	}
 
-		next.ServeHTTP(w, r)
-	})
+	return next
 }
 
 // Logger logs the method, path, and time taken for the given handler.
