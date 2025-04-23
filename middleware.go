@@ -33,7 +33,7 @@ func Logger(next http.Handler) http.Handler {
 		start := time.Now()
 		next.ServeHTTP(w, r)
 		log.Printf(
-			"method: %s\troute: %s\vtime_taken: %dms",
+			"method: %s\troute: %s\ttime_taken: %dms",
 			r.Method,
 			r.URL.Path,
 			time.Since(start).Milliseconds(),
